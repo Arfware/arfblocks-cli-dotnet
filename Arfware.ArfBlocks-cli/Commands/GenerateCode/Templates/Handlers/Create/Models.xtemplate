@@ -1,0 +1,15 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}};
+
+public class ResponseModel : IResponseModel
+{
+	#repeatable-start-responseModelProperties#
+	public {{PropertyType}} {{PropertyName}} { get; set; } 
+	#repeatable-end-responseModelProperties#
+}
+
+public class RequestModel : IRequestModel
+{
+	#repeatable-start-requestModelProperties#
+	public {{PropertyType}} {{PropertyName}} { get; set; } 
+	#repeatable-end-requestModelProperties#
+}

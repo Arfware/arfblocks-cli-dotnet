@@ -1,0 +1,23 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}};
+
+public class DataAccess : IDataAccess
+{
+	private readonly ApplicationDbContext _dbContext;
+
+	public DataAccess(ArfBlocksDependencyProvider depencyProvider)
+	{
+		_dbContext = depencyProvider.GetInstance<ApplicationDbContext>();
+	}
+
+	public async Task Add{{PureObjectName}}({{PureObjectName}} {{VariableObjectName}})
+	{
+		_dbContext.{{PluralObjectName}}.Add({{VariableObjectName}});
+		await _dbContext.SaveChangesAsync();
+	}
+
+	public async Task Update{{PureObjectName}}({{PureObjectName}} {{VariableObjectName}})
+	{
+		_dbContext.{{PluralObjectName}}.Update({{VariableObjectName}});
+		await _dbContext.SaveChangesAsync();
+	}
+}

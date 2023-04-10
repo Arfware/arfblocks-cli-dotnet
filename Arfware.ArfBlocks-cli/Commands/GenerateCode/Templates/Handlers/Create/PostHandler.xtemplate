@@ -1,0 +1,18 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}};
+
+public class PostHandler : IPostRequestHandler
+{
+    private readonly ActivityLogService _activityLogService;
+
+    public PostHandler(ArfBlocksDependencyProvider dependencyProvider, object dataAccess)
+    {
+        _activityLogService = dependencyProvider.GetInstance<ActivityLogService>();
+    }
+
+    public async Task Handle(IRequestModel payload, ArfBlocksRequestResult response, CancellationToken cancellationToken)
+    {
+        var responsePayload = (ResponseModel)response.Payload;
+
+        await _activityLogService.Create(typeof(PostHandler).Namespace, responsePayload.Id);
+    }
+}

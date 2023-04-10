@@ -1,0 +1,24 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}};
+
+public class Mapper
+{
+	public {{PureObjectName}} MapToNewEntity(RequestModel requestPayload)
+	{
+		return new {{PureObjectName}}
+		{
+			#repeatable-start-requestModelProperties#
+			{{PropertyName}} = requestPayload.{{PropertyName}},
+			#repeatable-end-requestModelProperties#
+		};
+	}
+
+	public ResponseModel MapToResponse({{PureObjectName}} {{VariableObjectName}})
+	{
+		return new ResponseModel()
+		{
+			#repeatable-start-responseModelProperties#
+			{{PropertyName}} = {{VariableObjectName}}.{{PropertyName}},
+			#repeatable-end-responseModelProperties#
+		};
+	}
+}

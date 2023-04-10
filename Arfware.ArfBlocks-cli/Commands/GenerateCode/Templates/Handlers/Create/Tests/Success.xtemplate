@@ -1,0 +1,60 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}}.Tests;
+
+public class Success : IArfBlocksTest
+{
+    private DbContextOperations _dbContextOperation;
+
+    private ArfBlocksDependencyProvider _dependencyProvider;
+
+    public void SwitchUser(CurrentUserModel user)
+    {
+        _dependencyProvider.Add<CurrentUserModel>(user);
+    }
+
+    public void SetDependencies(ArfBlocksDependencyProvider dependencyProvider)
+    {
+        _dependencyProvider = dependencyProvider;
+        var _dbContext = dependencyProvider.GetInstance<ApplicationDbContext>();
+        _dbContext.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+        _dbContextOperation = new DbContextOperations(_dbContext);
+    }
+
+    public async Task PrepareTest()
+    {
+        await Task.CompletedTask;
+    }
+
+    public async Task SetActor()
+    {
+        // NOP:
+        await Task.CompletedTask;
+
+        SwitchUser(TestDefinitions.Actors.SystemUser);
+    }
+
+    public async Task RunTest()
+    {
+        var requestPaylaod = new Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}}.RequestModel()
+        {
+            #repeatable-start-requestModelProperties#
+			{{PropertyName}} = "{{RandomValue}}",
+			#repeatable-end-requestModelProperties#
+        };
+
+        var requestOperator = new ArfBlocksRequestOperator(_dependencyProvider);
+        var response = await requestOperator.OperateInternalRequest<Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}}.Handler>(requestPaylaod);
+
+        response.HasError.Should().Be(false);
+
+        // Response Payload Control
+        var responsePayload = (Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}}.ResponseModel)response.Payload;
+        responsePayload.Id.Should().NotBeEmpty().And.NotBe(Guid.Empty);
+
+        // Db Control
+        var {{VariableObjectName}}OnDb = await _dbContextOperation.GetById<{{PureObjectName}}>(responsePayload.Id);
+
+		#repeatable-start-requestModelProperties#
+		{{VariableObjectName}}OnDb.{{PropertyName}}.Should().Be(requestPaylaod.{{PropertyName}});
+		#repeatable-end-requestModelProperties#
+    }
+}

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arfware.ArfBlocks-cli", "Arfware.ArfBlocks-cli\Arfware.ArfBlocks-cli.csproj", "{05D8E396-D594-47E2-A87B-9A1CD9E5E8FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{43BBB892-7ED3-4A69-AA70-053EB3A9E285}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Domain", "Example\Backend\TodoApp.Domain\TodoApp.Domain.csproj", "{93D599EB-36CC-41D0-A284-83F990F2936A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Infrastructure", "Example\Backend\TodoApp.Infrastructure\TodoApp.Infrastructure.csproj", "{363066C2-E772-4A7E-874B-C1BFDB280397}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Application", "Example\Backend\TodoApp.Application\TodoApp.Application.csproj", "{D8309760-9BBC-4D2A-85A8-A8D768046213}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoApp.Api", "Example\Backend\TodoApp.Api\TodoApp.Api.csproj", "{BE022AC8-DFC6-44CD-B370-2BFB91283954}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{05D8E396-D594-47E2-A87B-9A1CD9E5E8FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D8E396-D594-47E2-A87B-9A1CD9E5E8FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D8E396-D594-47E2-A87B-9A1CD9E5E8FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D8E396-D594-47E2-A87B-9A1CD9E5E8FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93D599EB-36CC-41D0-A284-83F990F2936A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93D599EB-36CC-41D0-A284-83F990F2936A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93D599EB-36CC-41D0-A284-83F990F2936A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93D599EB-36CC-41D0-A284-83F990F2936A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{363066C2-E772-4A7E-874B-C1BFDB280397}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{363066C2-E772-4A7E-874B-C1BFDB280397}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{363066C2-E772-4A7E-874B-C1BFDB280397}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{363066C2-E772-4A7E-874B-C1BFDB280397}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8309760-9BBC-4D2A-85A8-A8D768046213}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8309760-9BBC-4D2A-85A8-A8D768046213}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8309760-9BBC-4D2A-85A8-A8D768046213}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8309760-9BBC-4D2A-85A8-A8D768046213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BE022AC8-DFC6-44CD-B370-2BFB91283954}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE022AC8-DFC6-44CD-B370-2BFB91283954}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE022AC8-DFC6-44CD-B370-2BFB91283954}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE022AC8-DFC6-44CD-B370-2BFB91283954}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6} = {43BBB892-7ED3-4A69-AA70-053EB3A9E285}
+		{93D599EB-36CC-41D0-A284-83F990F2936A} = {D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6}
+		{363066C2-E772-4A7E-874B-C1BFDB280397} = {D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6}
+		{D8309760-9BBC-4D2A-85A8-A8D768046213} = {D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6}
+		{BE022AC8-DFC6-44CD-B370-2BFB91283954} = {D25D5B27-D0BE-4DED-A640-6F3EC8AE05B6}
+	EndGlobalSection
+EndGlobal

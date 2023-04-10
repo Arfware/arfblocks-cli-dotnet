@@ -1,0 +1,26 @@
+namespace TodoApp.Application.RequestHandlers.{{PluralObjectName}}.{{PluralEndpointType}}.{{ActionName}};
+
+public class Handler : IRequestHandler
+{
+    private readonly DataAccess dataAccessLayer;
+
+    public Handler(ArfBlocksDependencyProvider dependencyProvider, object dataAccess)
+    {
+        dataAccessLayer = (DataAccess)dataAccess;
+    }
+
+    public async Task<ArfBlocksRequestResult> Handle(IRequestModel payload, CancellationToken cancellationToken)
+    {
+        var mapper = new Mapper();
+        var requestPayload = (RequestModel)payload;
+
+        var {{VariableObjectName}} = mapper.MapToNewEntity(requestPayload);
+
+        // Add to Db
+        await dataAccessLayer.Add{{PureObjectName}}({{VariableObjectName}});
+
+        // Map to Response Model
+        var response = mapper.MapToResponse({{VariableObjectName}});
+        return ArfBlocksResults.Success(response);
+    }
+}
