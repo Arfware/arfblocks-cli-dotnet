@@ -5,3 +5,5 @@
 Available Commands:
 - Generate Docs
 - Generate Code (Not Completed)
+
+Detailed documentation is in the 'Z-Docs' folder.
