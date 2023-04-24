@@ -7,3 +7,9 @@ Available Commands:
 - Generate Code (Not Completed)
 
 Detailed documentation is in the 'Z-Docs' folder.
+
+## Changelogs
+
+### 1.0.0
+
+- Created Generate-Docs Command

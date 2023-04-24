@@ -12,7 +12,7 @@
 		<!-- endof: Package Options -->
 
 		<!-- startof: Package Informations -->
-		<PackageVersion>1.2.0</PackageVersion>
+		<PackageVersion>1.0.0</PackageVersion>
 		<Authors>Arfware</Authors>
 		<Company>Arfware</Company>
 		<Product>Arfware ArfBlocks-cli</Product>
