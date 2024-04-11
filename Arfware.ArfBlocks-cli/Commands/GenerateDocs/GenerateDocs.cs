@@ -26,10 +26,19 @@ internal class GenerateDocsCommand
 
 		// CommandUtils.BuildProject(_targetProjectDomain, "Domain");
 		// CommandUtils.BuildProject(_targetProjectInfrastructure, "Infrastructure");
-		CommandUtils.BuildProject(_targetProject);
+		var framework = FrameworkUtils.GetTargetFramework(_targetProject);
+		if (framework == null || string.IsNullOrEmpty(framework))
+		{
+			System.Console.WriteLine($"Target project's framework could not determined. Check project: {_targetProject}");
+			return;
+		}
+
+		if (RuntimeSettings.IsVerboseEnabled)
+			System.Console.WriteLine($"Determined framework: {framework}");
+		CommandUtils.BuildProject(_targetProject, framework);
 
 		// Build Assembly Path
-		var dllFilesInDirectory = FileUtils.BuildAssemblyPath(_targetProject);
+		var dllFilesInDirectory = FrameworkUtils.BuildAssemblyPath(_targetProject, framework);
 
 		// Load Assembly and Register Endpoints
 		Assembly assembly = null;
@@ -55,7 +64,7 @@ internal class GenerateDocsCommand
 		// DocumentedObjectBuilder.DumpDocumentedObjects(this.allDocumentedObjects);
 
 		// Generate Docs
-		var outputPath = FileUtils.GetAbsoluteOutputPath(this._outputPath);
+		var outputPath = FrameworkUtils.GetAbsoluteOutputPath(this._outputPath);
 		DocWriter.Write(TypeExtractor.enumTypeList, this.allDocumentedObjects, outputPath);
 
 		System.Console.WriteLine("\nGenerateDocs Command Succedded");

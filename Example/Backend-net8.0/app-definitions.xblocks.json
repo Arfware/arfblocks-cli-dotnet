@@ -1,0 +1,6 @@
+{
+	"ApplicationProjectPath": "./TodoApp.Application/TodoApp.Application.csproj",
+	"DomainProjectPath": "./TodoApp.Domain/TodoApp.Domain.csproj",
+	"HandlerNamespaceTemplate": "TodoApp.Application.RequestHandlers.{{pluralObjectName}}.{{pluralEndpointType}}.{{actionName}}",
+	"TestNamespaceTemplate": "TodoApp.Application.RequestHandlers.{{pluralObjectName}}.{{pluralEndpointType}}.{{actionName}}.Tests"
+}

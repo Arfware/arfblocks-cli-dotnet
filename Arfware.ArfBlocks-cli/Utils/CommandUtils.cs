@@ -4,12 +4,17 @@ namespace Arfware.ArfBlocksCli.Utils;
 
 internal class CommandUtils
 {
-	public static bool BuildProject(string targetProject)
+	public static bool BuildProject(string targetProject, string framework)
 	{
 		if (RuntimeSettings.IsVerboseEnabled)
 			System.Console.WriteLine($"\nStarted building target project");
 
-		CommandUtils.ExecuteCommand("dotnet", $"publish {targetProject} -c Release -f net6.0 --self-contained=false");
+		var command = "dotnet";
+		var arguments = $"publish {targetProject} -c Release -f {framework} --self-contained=false";
+		if (RuntimeSettings.IsVerboseEnabled)
+			System.Console.WriteLine($"Running: {command} {arguments}");
+
+		CommandUtils.ExecuteCommand(command, arguments);
 
 		if (RuntimeSettings.IsVerboseEnabled)
 			System.Console.WriteLine($"Finished building target project\n");

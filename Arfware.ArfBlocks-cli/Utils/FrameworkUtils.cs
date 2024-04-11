@@ -1,23 +1,32 @@
+using Microsoft.Build.Construction;
+
 namespace Arfware.ArfBlocksCli.Utils;
 
-internal class FileUtils
+internal class FrameworkUtils
 {
 	//************************************************************************************\\
 	// File Utils
 	//************************************************************************************\\
+
+	public static string GetTargetFramework(string targetProject)
+	{
+		var determinedFramework = string.Empty;
+		var projectRootElement = ProjectRootElement.Open(targetProject);
+		return projectRootElement.Properties.Where(p => p.Name == "TargetFramework").Select(p => p.Value).FirstOrDefault();
+	}
 
 	public static string GetAbsoluteOutputPath(string outputPath)
 	{
 		return Path.Combine(Directory.GetCurrentDirectory(), outputPath);
 	}
 
-	public static List<string> BuildAssemblyPath(string targetProject)
+	public static List<string> BuildAssemblyPath(string targetProject, string framework)
 	{
-		var targetProjectDirectory = FileUtils.GetTargetProjectDirectory(targetProject);
-		var targetProjectName = FileUtils.GetProjectNameWithoutExtention(targetProject);
+		var targetProjectDirectory = FrameworkUtils.GetTargetProjectDirectory(targetProject);
+		var targetProjectName = FrameworkUtils.GetProjectNameWithoutExtention(targetProject);
 		var targetProjectDllName = $"{targetProjectName}.dll";
-		var dllDirectory = Path.Combine(Directory.GetCurrentDirectory(), targetProjectDirectory, "bin", "Release", "net6.0", "publish");
-		// var dllDirectory = Path.Combine(Directory.GetCurrentDirectory(), targetProjectDirectory, "bin", "Release", "net6.0", targetProjectDllName);
+		var dllDirectory = Path.Combine(Directory.GetCurrentDirectory(), targetProjectDirectory, "bin", "Release", framework, "publish");
+		// var dllDirectory = Path.Combine(Directory.GetCurrentDirectory(), targetProjectDirectory, "bin", "Release", framework, targetProjectDllName);
 		var allFilesInDllDirectory = Directory.GetFiles(dllDirectory);
 		var dllsFilesInDllDirectory = allFilesInDllDirectory?
 										.Where(d => Path.GetExtension(d) == ".dll"
