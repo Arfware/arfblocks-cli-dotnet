@@ -1,11 +1,14 @@
 ﻿using System.CommandLine;
 using System.CommandLine.NamingConventionBinder;
 using System.Reflection;
+using System.Text.Json;
 using Arfware.ArfBlocksCli.Commands.GenerateCode;
 using Arfware.ArfBlocksCli.Commands.GenerateDocs;
 using Arfware.ArfBlocksCli.Constants;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Arfware.ArfBlocksCli;
+
 internal class Program
 {
 	private static Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
@@ -32,63 +35,58 @@ internal class Program
 			// new Option<bool>("v", description:"Verbose mode")
 		};
 
-		var generateDocsCommand = new Command("generate-docs")
+		var commandsViaFileCommand = new Command("exec")
 		{
 			new Option<string>(
-				"--target-project",
-				description: "The project that contains ArfBlocks handlers"),
-			new Option<string>(
-				"--output",
-				description: "The output to extract generated files"),
-
+				"--file",
+				description: "The file that contains ArfBlocks-cli commands as json format"),
 		};
 
-		var generateCodeCommand = new Command("generate-code")
+		commandsViaFileCommand.Handler = CommandHandler.Create<string>((file) =>
 		{
-			new Option<string>(
-				"--app-definition-file",
-				description: "The application definition file(application-definitions.arfblocks.json) path"),
-			new Option<string>(
-				"--target-endpoint-types",
-				description: "Which type of endpoint(s) you want to generate (c=Create, r=Detail, u=Update, d=Delete, l=All)"),
-			new Option<string>(
-				"--output-path",
-				description: "Output path for generated code"),
-		};
+			System.Console.WriteLine(file == null);
+			Console.WriteLine("Command Via File");
+			Console.WriteLine($"File Path: {file}");
 
-		generateDocsCommand.Handler = CommandHandler.Create<string, string>((targetProject, output) =>
-		{
-			Console.WriteLine("Generate Docs");
-			Console.WriteLine($"Project: {targetProject}");
-			Console.WriteLine($"Output: {output}");
+			if (!File.Exists(file))
+			{
+				throw new Exception($"File not exist: '{file}'");
+			}
 
 			System.Console.WriteLine("-------------------------------------------------------------------------");
 
-			var gdc = new GenerateDocsCommand(targetProject, output);
-			gdc.Generate();
+			var fileContent = File.ReadAllText(file);
+			var commandFile = JsonSerializer.Deserialize<CommandFile>(fileContent, new JsonSerializerOptions()
+			{
+				PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+			});
+
+			foreach (var command in commandFile.Commands)
+			{
+				System.Console.WriteLine($"Looking for command: {command.Name}");
+				System.Console.WriteLine($"Parameter Count: {command.Parameters.Count}");
+				switch (command.Name)
+				{
+					case "generate-docs":
+						System.Console.WriteLine($"Detected Command: 'generate-docs'");
+						var generateDocsCmd = new GenerateDocsCommand(command.Parameters);
+						generateDocsCmd.Generate();
+						break;
+
+					case "generate-code":
+						System.Console.WriteLine($"Detected Command: 'generate-code'");
+						var generateCodeCmd = new GenerateCodeCommand(command.Parameters);
+						generateCodeCmd.Generate().GetAwaiter().GetResult();
+						break;
+
+					default:
+						throw new Exception($"Command not recognized: {command.Name}");
+				}
+			}
 		});
 
-		// NOTE: (IMPORTANT) method parameters name must be the same with parameters in command
-		//   "--app-definition-file"  must be mapped to "appDefinitionFile"
-		generateCodeCommand.Handler = CommandHandler.Create<string, string, string>((
-			appDefinitionFile, targetEndpointTypes, outputPath) =>
-		{
-			System.Console.WriteLine(appDefinitionFile == null);
-			Console.WriteLine("Generate Code");
-			Console.WriteLine($"Application Definition File Path: {appDefinitionFile}");
-			Console.WriteLine($"Target Endpoint Types           : {targetEndpointTypes}");
-			Console.WriteLine($"Output Path                     : {outputPath}");
-
-			System.Console.WriteLine("-------------------------------------------------------------------------");
-
-			var gcc = new GenerateCodeCommand(appDefinitionFile, targetEndpointTypes, outputPath);
-			gcc.Generate().GetAwaiter().GetResult();
-		});
-
-		root.AddCommand(generateDocsCommand);
-		root.AddCommand(generateCodeCommand);
+		root.AddCommand(commandsViaFileCommand);
 
 		await root.InvokeAsync(args);
-
 	}
 }

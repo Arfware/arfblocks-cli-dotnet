@@ -1,0 +1,66 @@
+{
+	"minCliVersion": "1.2.3",
+	"project": "Example Todo App",
+	"description": "Generate api docs and generete example CRUDL code",
+	"company": "Arfware/Labs",
+	"commands": [
+		{
+			"name": "generate-docs",
+			"parameters": [
+				{
+					"key": "targetProject",
+					"value": "../Example/Backend-net8.0/TodoApp.Application/TodoApp.Application.csproj"
+				},
+				{
+					"key": "output",
+					"value": "../Example/Frontend/models/api/"
+				},
+				{
+					"key": "outputImports",
+					"value": "// Imports \nimport { api as axios } from 'mtsk-config'; \nimport { ApiService } from '../services';"
+				},
+				{
+					"key": "outputTypes",
+					"value": "// Custom Types \ntype Guid = string; \ntype Double = number;"
+				},
+				{
+					"key": "outputSettings",
+					"value": "// Settings..."
+				},
+				{
+					"key": "requestUrl",
+					"value": "AppConfig.ApiUrl"
+				}
+			]
+		},
+		{
+			"name": "generate-code",
+			"parameters": [
+				{
+					"key": "targetEndpointTypes",
+					"value": "crudl"
+				},
+				{
+					"key": "output",
+					"value": "../Example/Output/"
+				},
+				{
+					"key": "applicationProjectPath",
+					"value": "./TodoApp.Application/TodoApp.Application.csproj"
+				},
+				{
+					"key": "domainProjectPath",
+					"value": "./TodoApp.Domain/TodoApp.Domain.csproj"
+				},
+				{
+					"key": "handlerNamespaceTemplate",
+					"value": "TodoApp.Application.RequestHandlers.{{pluralObjectName}}.{{pluralEndpointType}}.{{actionName}}"
+				},
+				{
+					"key": "testNamespaceTemplate",
+					"value": "TodoApp.Application.RequestHandlers.{{pluralObjectName}}.{{pluralEndpointType}}.{{actionName}}.Tests"
+				}
+			]
+		}
+	]
+}

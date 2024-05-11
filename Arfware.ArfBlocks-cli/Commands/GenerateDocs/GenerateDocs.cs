@@ -10,10 +10,52 @@ internal class GenerateDocsCommand
 {
 	private string _targetProject;
 	private string _outputPath;
-	public GenerateDocsCommand(string targetProject, string outputPath)
+	private string _outputImports;
+	private string _outputTypes;
+	private string _outputSettings;
+	private string _requestUrl;
+	public GenerateDocsCommand(List<CommandParameter> commandParameters)
 	{
-		_targetProject = targetProject;
-		_outputPath = outputPath;
+		ParseParams(commandParameters);
+	}
+
+	public void ParseParams(List<CommandParameter> parameters)
+	{
+		var targetProjectParameterKey = "targetProject";
+		var targetProjectParameter = parameters.FirstOrDefault(p => p.Key == targetProjectParameterKey);
+		if (targetProjectParameter == null)
+			throw new Exception($"Parameter is null: {targetProjectParameterKey}");
+		_targetProject = targetProjectParameter.Value;
+
+		var outputParameterKey = "output";
+		var outputParameter = parameters.FirstOrDefault(p => p.Key == outputParameterKey);
+		if (outputParameter == null)
+			throw new Exception($"Parameter is null: {outputParameterKey}");
+		_outputPath = outputParameter.Value;
+
+		var outputImportsParameterKey = "outputImports";
+		var outputImportsParameter = parameters.FirstOrDefault(p => p.Key == outputImportsParameterKey);
+		if (outputImportsParameter == null)
+			throw new Exception($"Parameter is null: {outputImportsParameterKey}");
+		_outputImports = outputImportsParameter.Value;
+
+		var outputTypesParameterKey = "outputTypes";
+		var outputTypesParameter = parameters.FirstOrDefault(p => p.Key == outputTypesParameterKey);
+		if (outputTypesParameter == null)
+			throw new Exception($"Parameter is null: {outputTypesParameterKey}");
+		_outputTypes = outputTypesParameter.Value;
+
+		var outputSettingsParameterKey = "outputSettings";
+		var outputSeetingsParameter = parameters.FirstOrDefault(p => p.Key == outputSettingsParameterKey);
+		if (outputSeetingsParameter == null)
+			throw new Exception($"Parameter is null: {outputSettingsParameterKey}");
+		_outputSettings = outputSeetingsParameter.Value;
+
+		var requestUrlParameterKey = "requestUrl";
+		var requestUrlParameter = parameters.FirstOrDefault(p => p.Key == requestUrlParameterKey);
+		if (requestUrlParameter == null)
+			throw new Exception($"Parameter is null: {requestUrlParameterKey}");
+		_requestUrl = requestUrlParameter.Value;
 	}
 
 	public List<DocumentedObject> allDocumentedObjects;
@@ -65,7 +107,7 @@ internal class GenerateDocsCommand
 
 		// Generate Docs
 		var outputPath = FrameworkUtils.GetAbsoluteOutputPath(this._outputPath);
-		DocWriter.Write(TypeExtractor.enumTypeList, this.allDocumentedObjects, outputPath);
+		DocWriter.Write(TypeExtractor.enumTypeList, this.allDocumentedObjects, outputPath, _outputImports, _outputTypes, _outputSettings, _requestUrl);
 
 		System.Console.WriteLine("\nGenerateDocs Command Succedded");
 	}

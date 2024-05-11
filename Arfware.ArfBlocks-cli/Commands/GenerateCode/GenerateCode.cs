@@ -9,14 +9,26 @@ namespace Arfware.ArfBlocksCli.Commands.GenerateCode;
 
 internal class GenerateCodeCommand
 {
-	private string _appDefinitionFile;
 	private string _targetEndpointTypes;
 	private string _outputPath;
-	public GenerateCodeCommand(string appDefinitionFile, string targetEndpointTypes, string outputPath)
+	public GenerateCodeCommand(List<CommandParameter> commandParameters)
 	{
-		_appDefinitionFile = appDefinitionFile;
-		_targetEndpointTypes = targetEndpointTypes;
-		_outputPath = outputPath;
+		ParseParams(commandParameters);
+	}
+
+	public void ParseParams(List<CommandParameter> parameters)
+	{
+		var targetEndpointTypesParameterKey = "targetEndpointTypes";
+		var targetProjectParemeter = parameters.FirstOrDefault(p => p.Key == targetEndpointTypesParameterKey);
+		if (targetProjectParemeter == null)
+			throw new Exception($"Parameter is null: {targetEndpointTypesParameterKey}");
+		_targetEndpointTypes = targetProjectParemeter.Value;
+
+		var outputPathParameterKey = "outputPath";
+		var outputPathParemeter = parameters.FirstOrDefault(p => p.Key == outputPathParameterKey);
+		if (targetProjectParemeter == null)
+			throw new Exception($"Parameter is null: {outputPathParameterKey}");
+		_outputPath = targetProjectParemeter.Value;
 	}
 
 	public List<DocumentedObject> allDocumentedObjects;
