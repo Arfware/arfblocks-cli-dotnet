@@ -11,6 +11,10 @@ Detailed documentation is in the 'Z-Docs' folder.
 
 ## Changelogs
 
+### 1.2.1
+
+- Changed commands to run via file
+
 ### 1.2.0
 
 - Added multi-framework support to commands
