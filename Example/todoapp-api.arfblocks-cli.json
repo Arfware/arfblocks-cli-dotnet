@@ -28,6 +28,10 @@
 					"value": "// Settings..."
 				},
 				{
+					"key": "nameSpace",
+					"value": "TodoAPI"
+				},
+				{
 					"key": "requestUrl",
 					"value": "AppConfig.ApiUrl"
 				}

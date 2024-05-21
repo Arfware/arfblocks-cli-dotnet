@@ -14,7 +14,7 @@ type Double = number;
 
 // Settings...
 
-export namespace API {
+export namespace TodoAPI {
 
 	export namespace Enums {
 

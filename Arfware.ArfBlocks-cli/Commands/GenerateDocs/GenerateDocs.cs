@@ -14,6 +14,7 @@ internal class GenerateDocsCommand
 	private string _outputTypes;
 	private string _outputSettings;
 	private string _requestUrl;
+	private string _nameSpace;
 	public GenerateDocsCommand(List<CommandParameter> commandParameters)
 	{
 		ParseParams(commandParameters);
@@ -50,6 +51,12 @@ internal class GenerateDocsCommand
 		if (outputSeetingsParameter == null)
 			throw new Exception($"Parameter is null: {outputSettingsParameterKey}");
 		_outputSettings = outputSeetingsParameter.Value;
+
+		var nameSpaceParameterKey = "nameSpace";
+		var nameSpaceParameter = parameters.FirstOrDefault(p => p.Key == nameSpaceParameterKey);
+		if (nameSpaceParameter == null)
+			throw new Exception($"Parameter is null: {nameSpaceParameterKey}");
+		_nameSpace = nameSpaceParameter.Value;
 
 		var requestUrlParameterKey = "requestUrl";
 		var requestUrlParameter = parameters.FirstOrDefault(p => p.Key == requestUrlParameterKey);
@@ -107,7 +114,7 @@ internal class GenerateDocsCommand
 
 		// Generate Docs
 		var outputPath = FrameworkUtils.GetAbsoluteOutputPath(this._outputPath);
-		DocWriter.Write(TypeExtractor.enumTypeList, this.allDocumentedObjects, outputPath, _outputImports, _outputTypes, _outputSettings, _requestUrl);
+		DocWriter.Write(TypeExtractor.enumTypeList, this.allDocumentedObjects, outputPath, _outputImports, _outputTypes, _outputSettings, _nameSpace, _requestUrl);
 
 		System.Console.WriteLine("\nGenerateDocs Command Succedded");
 	}

@@ -42,6 +42,7 @@ internal class DocWriter
 		string outputImports,
 		string outputTypes,
 		string outputSettings,
+		string nameSpace,
 		string requestUrl)
 	{
 		if (RuntimeSettings.IsVerboseEnabled)
@@ -57,7 +58,7 @@ internal class DocWriter
 
 			content += Environment.NewLine + outputSettings;
 
-			content += Environment.NewLine + Environment.NewLine + "export namespace API {" + Environment.NewLine;
+			content += Environment.NewLine + Environment.NewLine + "export namespace " + nameSpace + " {" + Environment.NewLine;
 
 			// ENUMS _______________________________________________________________________________________________________________
 
