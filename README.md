@@ -11,6 +11,10 @@ Detailed documentation is in the 'Z-Docs' folder.
 
 ## Changelogs
 
+### 1.2.2
+
+- Added namespace specifying support to generate-docs via file
+
 ### 1.2.1
 
 - Changed commands to run via file
