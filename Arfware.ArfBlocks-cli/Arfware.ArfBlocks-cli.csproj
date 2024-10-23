@@ -12,7 +12,7 @@
 		<!-- endof: Package Options -->
 
 		<!-- startof: Package Informations -->
-		<PackageVersion>1.2.2</PackageVersion>
+		<PackageVersion>2.0.0</PackageVersion>
 		<Authors>Arfware</Authors>
 		<Company>Arfware</Company>
 		<Product>Arfware ArfBlocks-cli</Product>
@@ -40,7 +40,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Arfware.ArfBlocks.Core" Version="1.1.0" />
+		<PackageReference Include="Arfware.ArfBlocks.Core" Version="2.0.0" />
 		<PackageReference Include="Microsoft.Build" Version="16.11.0" />
 		<PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
 		<PackageReference Include="System.CommandLine.DragonFruit" Version="0.4.0-alpha.22272.1" />
