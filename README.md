@@ -11,6 +11,10 @@ Detailed documentation is in the 'Z-Docs' folder.
 
 ## Changelogs
 
+### 2.0.0
+
+- Updateded ArfBlocks library version as 2.0.0
+
 ### 1.2.2
 
 - Added namespace specifying support to generate-docs via file
