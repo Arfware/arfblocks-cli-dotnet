@@ -11,6 +11,10 @@ Detailed documentation is in the 'Z-Docs' folder.
 
 ## Changelogs
 
+### 2.2.0
+
+- Updateded ArfBlocks library version as 2.2.0
+
 ### 2.1.0
 
 - Updateded ArfBlocks library version as 2.1.0
