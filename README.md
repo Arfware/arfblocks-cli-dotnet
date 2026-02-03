@@ -11,6 +11,11 @@ Detailed documentation is in the 'Z-Docs' folder.
 
 ## Changelogs
 
+### 2.3.0
+
+- Updateded ArfBlocks library version as 2.3.0
+- Added SkipDocumentation implementation for hiding properties from documentation
+
 ### 2.2.0
 
 - Updateded ArfBlocks library version as 2.2.0

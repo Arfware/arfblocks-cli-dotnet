@@ -71,6 +71,7 @@ export namespace TodoAPI {
 				departmentFactor: Double;
 				departmentType: Enums.DepartmentTypes;
 				taskStatus: Enums.TodoTaskStatus;
+				values: any;
 				aliases: string[];
 			}
 		}

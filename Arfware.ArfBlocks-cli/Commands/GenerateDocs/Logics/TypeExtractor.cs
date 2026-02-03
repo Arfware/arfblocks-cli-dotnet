@@ -130,11 +130,19 @@ internal class TypeExtractor
 		{
 			return "boolean";
 		}
+		else if (PropertyType == typeof(byte))
+		{
+			return "any";
+		}
 		else if (PropertyType.IsEnum)
 		{
 			CreateEnumAsString(PropertyType);
 
 			return $"Enums.{PropertyType.Name}";
+		}
+		else if (PropertyType.IsGenericType && (PropertyType.GetGenericTypeDefinition() == typeof(Dictionary<,>)))
+		{
+			return "any";
 		}
 		else if (PropertyType.IsGenericType && (PropertyType.GetGenericTypeDefinition() == typeof(List<>)))
 		{

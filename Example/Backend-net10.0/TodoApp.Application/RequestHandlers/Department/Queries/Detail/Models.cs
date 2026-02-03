@@ -9,6 +9,8 @@ public class ResponseModel : IResponseModel
 	public DepartmentTypes DepartmentType { get; set; }
 	public TodoTaskStatus TaskStatus { get; set; }
 
+	public Dictionary<Guid, string> Values { get; set; }
+
 	public List<string> Aliases { get; set; }
 }
 
