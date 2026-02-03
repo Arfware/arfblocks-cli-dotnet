@@ -11,7 +11,7 @@ public class Handler : IRequestHandler
 		_dataAccessLayer = (DataAccess)dataAccess;
 	}
 
-	public async Task<ArfBlocksRequestResult> Handle(IRequestModel payload, CancellationToken cancellationToken)
+	public async Task<ArfBlocksRequestResult> Handle(IRequestModel payload, EndpointContext context, CancellationToken cancellationToken)
 	{
 		// Get All Users from DB
 		var allUsers = await _dataAccessLayer.GetAllUsers();

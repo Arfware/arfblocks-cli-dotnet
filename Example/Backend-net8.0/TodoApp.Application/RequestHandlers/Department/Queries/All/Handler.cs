@@ -8,7 +8,7 @@ public class Handler : IRequestHandler
 		_dataAccessLayer = (DataAccess)dataAccess;
 	}
 
-	public async Task<ArfBlocksRequestResult> Handle(IRequestModel payload, CancellationToken cancellationToken)
+	public async Task<ArfBlocksRequestResult> Handle(IRequestModel payload, EndpointContext context, CancellationToken cancellationToken)
 	{
 		// Get All Departments from DB
 		var allDepartments = await _dataAccessLayer.GetAllDepartments();

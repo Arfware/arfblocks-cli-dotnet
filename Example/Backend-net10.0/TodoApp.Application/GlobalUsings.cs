@@ -7,6 +7,7 @@ global using Arfware.ArfBlocks.Core;
 global using Arfware.ArfBlocks.Core.Abstractions;
 global using Arfware.ArfBlocks.Core.RequestResults;
 global using Arfware.ArfBlocks.Core.Attributes;
+global using Arfware.ArfBlocks.Core.Contexts;
 
 global using TodoApp.Infrastructure.Services;
 global using TodoApp.Domain.Entities;

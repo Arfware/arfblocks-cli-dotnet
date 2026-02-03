@@ -9,11 +9,11 @@
 			"parameters": [
 				{
 					"key": "targetProject",
-					"value": "../Example/Backend-net8.0/TodoApp.Application/TodoApp.Application.csproj"
+					"value": "../../../../Example/Backend-net8.0/TodoApp.Application/TodoApp.Application.csproj"
 				},
 				{
 					"key": "output",
-					"value": "../Example/Frontend/models/api/"
+					"value": "../../../../Example/Frontend/models/api/"
 				},
 				{
 					"key": "outputImports",
