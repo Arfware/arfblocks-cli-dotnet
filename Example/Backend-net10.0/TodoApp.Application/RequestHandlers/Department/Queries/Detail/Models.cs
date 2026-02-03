@@ -11,6 +11,9 @@ public class ResponseModel : IResponseModel
 
 	public Dictionary<Guid, string> Values { get; set; }
 
+	[SkipDocumentation]
+	public List<byte> Bytes { get; set; }
+
 	public List<string> Aliases { get; set; }
 }
 

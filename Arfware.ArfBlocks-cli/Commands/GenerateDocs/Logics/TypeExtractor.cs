@@ -1,4 +1,5 @@
 using System.Reflection;
+using Arfware.ArfBlocks.Core.Attributes;
 using Arfware.ArfBlocks.Core.Models;
 using Arfware.ArfBlocksCli.Commands.GenerateDocs.Models;
 
@@ -29,6 +30,10 @@ internal class TypeExtractor
 		{
 			var propertyName = char.ToLowerInvariant(property.Name[0]) + property.Name.Substring(1);
 			var propertyType = property.PropertyType;
+
+			// skip documentation generation for marked attributes
+			if (Attribute.IsDefined(property, typeof(SkipDocumentationAttribute)))
+				return;
 
 			if (Nullable.GetUnderlyingType(property.PropertyType) != null)
 			{
