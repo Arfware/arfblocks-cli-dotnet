@@ -1,0 +1,41 @@
+{
+	"minCliVersion": "1.2.3",
+	"project": "Example Todo App",
+	"description": "Generate api docs and generete example CRUDL code",
+	"company": "Arfware/Labs",
+	"commands": [
+		{
+			"name": "generate-docs",
+			"parameters": [
+				{
+					"key": "targetProject",
+					"value": "../../../../Example/Backend-net10.0/TodoApp.Application/TodoApp.Application.csproj"
+				},
+				{
+					"key": "output",
+					"value": "../../../../Example/Frontend/models/api/"
+				},
+				{
+					"key": "outputImports",
+					"value": "// Imports \nimport { api as axios } from 'mtsk-config'; \nimport { ApiService } from '../services';"
+				},
+				{
+					"key": "outputTypes",
+					"value": "// Custom Types \ntype Guid = string; \ntype Double = number;"
+				},
+				{
+					"key": "outputSettings",
+					"value": "// Settings..."
+				},
+				{
+					"key": "nameSpace",
+					"value": "TodoAPI"
+				},
+				{
+					"key": "requestUrl",
+					"value": "AppConfig.ApiUrl"
+				}
+			]
+		}
+	]
+}
